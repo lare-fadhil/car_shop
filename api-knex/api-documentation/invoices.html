@@ -1,0 +1,1381 @@
+
+        <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github.min.css">
+    <title>API Documentaion | /invoices Route</title>
+    <style>
+        div.code {
+            white-space: pre-wrap!important;
+            text-align: left;
+        }
+        td.hljs-ln-code {
+	white-space: pre-wrap;
+}
+    </style>
+</head>
+
+<body class=" ">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <br>
+            <h1>API Documentaion</h1>
+            <br>
+            <br>
+                <p>
+                    This is the API documentation for the <code class="text-secondary">invoices</code> table. It contains the schema and route end points for the <code class="text-secondary">invoices</code> table.
+                </p>
+                <p>
+                <code class="text-secondary">invoices</code> end points is located at the following URL:<code class="text-secondary"> http://your-server-name/invoices</code>
+                </p>
+                <p>
+                media type:<code class="text-secondary">application/json</code>
+                </p>
+                <p>
+                HTTP methods: <code class="text-secondary">GET</code>, <code class="text-secondary">POST</code>, <code class="text-secondary">PUT</code>, and <code class="text-secondary">DELETE</code></p>
+            </div>
+            <div class="col-12">
+            schema
+            <ul>
+            <li>
+                    <a href="#schema">
+                        <code class="text-info">schema</code>
+                    </a>
+                </li>
+            </ul>
+            routes
+            <ul>
+            
+                <li>
+                <code class="text-success">GET</code>
+                    <a class="text-info" href="#invoices/all">
+                        <code class="text-info">/invoices/all</code>
+                    </a>
+                    <span style="color:grey"> # list all invoices</span>
+                </li>
+                
+                <li>
+                <code class="text-success">GET</code>
+                    <a class="text-info" href="#invoices/all/{invoice_id}">
+                        <code class="text-info">/invoices/all/{invoice_id}</code>
+                    </a>
+                    <span style="color:grey"> # get invoices detail</span>
+                </li>
+                
+                <li>
+                <code class="text-success">GET</code>
+                    <a class="text-info" href="#invoices/filter?column={column_name}&value={value}">
+                        <code class="text-info">/invoices/filter?column={column_name}&value={value}</code>
+                    </a>
+                    <span style="color:grey"> # filter invoices by single column</span>
+                </li>
+                
+                <li>
+                <code class="text-success">GET</code>
+                    <a class="text-info" href="#invoices/report?{column_name}={value}">
+                        <code class="text-info">/invoices/report?{column_name}={value}</code>
+                    </a>
+                    <span style="color:grey"> # report invoices by single/multiple column using & operator</span>
+                </li>
+                
+                <li>
+                <code class="text-warning">POST</code>
+                    <a class="text-info" href="#invoices/create">
+                        <code class="text-info">/invoices/create</code>
+                    </a>
+                    <span style="color:grey"> # create one invoices</span>
+                </li>
+                
+                <li>
+                <code class="text-warning">POST</code>
+                    <a class="text-info" href="#invoices/create/list">
+                        <code class="text-info">/invoices/create/list</code>
+                    </a>
+                    <span style="color:grey"> # create multiple invoices</span>
+                </li>
+                
+                <li>
+                <code class="text-info">PUT</code>
+                    <a class="text-info" href="#invoices/update/{invoice_id}">
+                        <code class="text-info">/invoices/update/{invoice_id}</code>
+                    </a>
+                    <span style="color:grey"> # update invoices by invoice_id</span>
+                </li>
+                
+                <li>
+                <code class="text-info">PUT</code>
+                    <a class="text-info" href="#invoices/update?column={column_name}&value={value}">
+                        <code class="text-info">/invoices/update?column={column_name}&value={value}</code>
+                    </a>
+                    <span style="color:grey"> # update invoices by any column </span>
+                </li>
+                
+                <li>
+                <code class="text-danger">DELETE</code>
+                    <a class="text-info" href="#invoices/delete/{invoice_id}">
+                        <code class="text-info">/invoices/delete/{invoice_id}</code>
+                    </a>
+                    <span style="color:grey"> # delete one invoices</span>
+                </li>
+                
+                <li>
+                <code class="text-danger">DELETE</code>
+                    <a class="text-info" href="#invoices/delete">
+                        <code class="text-info">/invoices/delete</code>
+                    </a>
+                    <span style="color:grey"> # delete multiple invoices</span>
+                </li>
+                
+                
+            </ul>
+            </div>
+            <div class="col-12">
+                <h3 id="schema">Schema</h3>
+                
+                    
+                            <h6 class="mx-3"><code class="text-secondary">- invoice_id</code> <code class="">int</code>✅</h6>
+
+            
+                            <h6 class="mx-3"><code class="text-secondary">- invoice_name</code> <code class="">varchar</code></h6>
+
+            
+                            <h6 class="mx-3"><code class="text-secondary">- invoice_price</code> <code class="">float</code></h6>
+
+            
+                            <h6 class="mx-3"><code class="text-secondary">- invoice_discount</code> <code class="">float</code></h6>
+
+            
+                            <h6 class="mx-3"><code class="text-secondary">- invoice_date</code> <code class="">timestamp</code></h6>
+
+            
+                            <h6 class="mx-3"><code class="text-secondary">- invoice_note</code> <code class="">varchar</code></h6>
+
+            
+                            <h6 class="mx-3"><code class="text-secondary">- user_id</code> <code class="">int</code></h6>
+
+            
+                   
+            </div>
+            <div class="col-12">
+                <h3>Routes</h3>
+                    
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/all"><code class="text-success">GET /invoices/all</code></h4>
+                        <span style="color:grey"> # list all invoices</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.get('/invoices/all' ).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/all/{invoice_id}"><code class="text-success">GET /invoices/all/{invoice_id}</code></h4>
+                        <span style="color:grey"> # get invoices detail</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      integer
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # path
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.get('/invoices/all/{invoice_id}' ).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/filter?column={column_name}&value={value}"><code class="text-success">GET /invoices/filter?column={column_name}&value={value}</code></h4>
+                        <span style="color:grey"> # filter invoices by single column</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - column_name
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      string
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # query
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - value
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      string
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # query
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+[{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}]
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.get('/invoices/filter?column={column_name}&value={value}' ).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/report?{column_name}={value}"><code class="text-success">GET /invoices/report?{column_name}={value}</code></h4>
+                        <span style="color:grey"> # report invoices by single/multiple column using & operator</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - column_name
+                                      </code>
+                                      <span class="text-danger">
+                                      
+                                      </span>
+                                      string
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # query
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+[{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}]
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.get('/invoices/report?{column_name}={value}' ).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/create"><code class="text-warning">POST /invoices/create</code></h4>
+                        <span style="color:grey"> # create one invoices</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      int
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_name
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      varchar
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_price
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      float
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_discount
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      float
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_date
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      timestamp
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_note
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      varchar
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - user_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      int
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.post('/invoices/create' ,{ params : {'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}}).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/create/list"><code class="text-warning">POST /invoices/create/list</code></h4>
+                        <span style="color:grey"> # create multiple invoices</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - list
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      array
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+[{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'},{invoice_id: 2, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}]
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.post('/invoices/create/list' ,{ params : {list: [{'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'},{'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}]}}).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/update/{invoice_id}"><code class="text-info">PUT /invoices/update/{invoice_id}</code></h4>
+                        <span style="color:grey"> # update invoices by invoice_id</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      int
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_name
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      varchar
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_price
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      float
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_discount
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      float
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_date
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      timestamp
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_note
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      varchar
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - user_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      int
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.put('/invoices/update/{invoice_id}' ,{ params : {'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}}).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/update?column={column_name}&value={value}"><code class="text-info">PUT /invoices/update?column={column_name}&value={value}</code></h4>
+                        <span style="color:grey"> # update invoices by any column </span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      int
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_name
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      varchar
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_price
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      float
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_discount
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      float
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_date
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      timestamp
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_note
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      varchar
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - user_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      int
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - column
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      string
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # query
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - value
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      string
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # query
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+{invoice_id: 1, 'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.put('/invoices/update?column={column_name}&value={value}' ,{ params : {'invoice_name': 'varchar(255)','invoice_price': 'float','invoice_discount': 'float','invoice_date': 'timestamp','invoice_note': 'varchar(255)','user_id': 'int(11)'}}).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/delete/{invoice_id}"><code class="text-danger">DELETE /invoices/delete/{invoice_id}</code></h4>
+                        <span style="color:grey"> # delete one invoices</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - invoice_id
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      integer
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # path
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+{deleted_id: 1}
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.delete('/invoices/delete/{invoice_id}' ).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+            <div class="card  my-2">
+                        <div class="bg-white card-header">
+                        <h4 id="invoices/delete"><code class="text-danger">DELETE /invoices/delete</code></h4>
+                        <span style="color:grey"> # delete multiple invoices</span>
+                        </div>
+                        <div class="card-body">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <h5>Request</h5>
+                            
+                                
+                                      <h6>
+                                      
+                                      <code class="text-secondary">
+                                        - list
+                                      </code>
+                                      <span class="text-danger">
+                                      *
+                                      </span>
+                                      array
+                                      
+                                      
+                                      <code style="color:grey">
+                                      # form
+                                      </code>
+                                      
+                                      </h6>
+                                      
+                                    
+                                    <hr/>
+                                    <h5>Response</h5>
+                                    
+                                      
+                                            <span>Status 200</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # successful operation</span>
+                                            <pre><code class="language-json code">
+[1,2,3]
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 400</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # bad request</span>
+                                            <pre><code class="language-json code">
+SQL Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 401</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # validation</span>
+                                            <pre><code class="language-json code">
+Validation Error Message
+                                              </code></pre>
+                                            </p>
+                                            
+                                            <span>Status 404</span>
+                                            <p class="card-text">
+                                            <span style="color:grey"> # not found</span>
+                                            <pre><code class="language-json code">
+Route Not Found
+                                              </code></pre>
+                                            </p>
+                                            
+                                       
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+            <pre style="height: 100%;white-space: pre-wrap!important;"><code style="height: 100%;white-space: pre-wrap!important;" class="language-js code">
+// axios example
+axios.delete('/invoices/delete' ,{ params : {list: [1,2,3]}}).then((response) =>{
+    // handle success
+    console.log(response.data);
+}).catch((error) =>{
+    console.log(error);
+});
+                </code></pre></div>
+            </div>
+            </div>
+                        
+                             </div>
+                                        </div>
+
+
+            
+                    
+                        
+
+                    
+                  </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/languages/go.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</body>
+
+</html>
+    
