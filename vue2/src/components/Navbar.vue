@@ -2,13 +2,13 @@
 <template>
     <div>
         <v-app-bar app class="navbar">
-            <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
+            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-btn icon="" to="/">
                 <v-icon>mdi-home</v-icon>
             </v-btn>
             <v-app-bar-title>{{$store.getters.language.app_name}}</v-app-bar-title>
         </v-app-bar>
-        <!-- <v-navigation-drawer v-model="drawer" app :right="$store.getters.language.rtl">
+        <v-navigation-drawer v-model="drawer" app :right="$store.getters.language.rtl">
             <template v-slot:prepend>
                 <v-list-item>
                     <v-list-item-content>
@@ -24,7 +24,7 @@
                 </v-list-item-content>
             </v-list-item>
             </v-list>
-        </v-navigation-drawer> -->
+        </v-navigation-drawer>
     </div>
 </template>
 <script>

@@ -20,7 +20,9 @@ export default {
 
 
     },
-
+  mounted() {
+    this.$vuetify.rtl = true
+  },
     name: 'App',
 
     data: () => ({
