@@ -7,5 +7,5 @@ Vue.use(Vuetify);
 export default new Vuetify({
 
     // dark mode on 
-    theme: { dark: true },
+    // theme: { dark: true },
 });  

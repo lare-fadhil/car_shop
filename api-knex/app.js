@@ -19,6 +19,8 @@ const items = require('./routes/items.route')
 
 const users = require('./routes/users.route')
 
+const init = require('./routes/init.route')
+
 app.use(morgan('dev'))
 
 app.use(bodyParser.urlencoded({extended:false}))
@@ -76,6 +78,7 @@ app.use('/invoice_items',invoice_items)
 app.use('/invoices',invoices)
 app.use('/items',items)
 app.use('/users',users)
+app.use('/init', init)
 
 app.use((req,res,next)=>{
     const error = new Error('Route Not Found')

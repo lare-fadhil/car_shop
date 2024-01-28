@@ -79,7 +79,41 @@ export default new Vuex.Store({
         
     },
     actions: {
-        
+        init(context, uid) {
+            const id = uid
+            // const id = 'yn5lsqU1MwZPOPfSAUR7tmQ8be82'
+            axios.get('init/' + id)
+                .then(r => {
+                    if (r.status == 200 && r.data) {
+                        context.commit('setAuth', {
+                            user: r.data.user
+                        })
+                        context.commit('setCustomersList', r.data.customers)
+                        context.commit('setUsersList', r.data.users)
+                        context.commit('setItemsList', r.data.items)
+                        // context.commit('setStoreInformation', r.data.store_information)
+                        // context.commit('setItemColorsList', r.data.item_colors)
+                        // context.commit('setItemTypesList', r.data.item_types)
+                        // context.commit('setItemSizesList', r.data.item_sizes)
+                        // context.commit('setShopItemsList', r.data.shop_items)
+                        // context.commit('setDriversList', r.data.drivers)
+                        context.state.user = r.data.user
+                        context.state.init_state = true
+                    } else {
+
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+        logout(context) {
+            auth.signOut()
+            localStorage.removeItem('auth')
+            context.state.auth.isAuth = false
+            router.push('/login')
+            context.state.init_state = true
+        },
     },
 })
         
