@@ -35,6 +35,8 @@
 			</form>
 			<v-layout row wrap mt-5>
 				<v-flex xs12>
+                    <v-text-field v-model="search" type="text" label="گەڕان" dense class="mx-1" filled outlined>
+                    </v-text-field>
 					<v-card>
 						<v-card-text>
 							<v-data-table :headers="headers" v-model="selected_rows" :search="search" :items="rows" class="elevation-0" item-key="car_id">

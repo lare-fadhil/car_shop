@@ -23,8 +23,8 @@
                         </v-text-field>
                     </v-flex> -->
                         <v-flex xs12 lg2 xl2 md3 sm4>
-                                <v-select class="mx-1" clearable  :items="users" v-model="expenses.user_id" dense  filled outlined  item-text="user_id"
-                                    item-value="user_id" :return-object="false" :label="$store.getters.language.data.users.user_id">
+                                <v-select class="mx-1" clearable  :items="users" v-model="expenses.user_id" dense  filled outlined  item-text="user_name"
+                                    item-value="user_id" :return-object="false" :label="$store.getters.language.data.users.user_name" disabled>
                                 </v-select>
                         </v-flex>
                 
@@ -35,9 +35,11 @@
                 </form>
 <v-layout row wrap mt-5>
     <v-flex xs12>
+        <v-text-field v-model="search" type="text" label="گەڕان" dense class="mx-1" filled outlined>
+                    </v-text-field>
         <v-card>
             <v-card-text>
-                <v-data-table :headers="headers"  show-select v-model="selected_rows"    :search="search" :items="rows" class="elevation-0"
+                <v-data-table :headers="headers" v-model="selected_rows"    :search="search" :items="rows" class="elevation-0"
                     item-key="expense_id">
                     <template v-slot:[`item.expense_id`]="{ item }">
                         <div>
@@ -138,6 +140,9 @@
             users(){
                 return this.$store.getters.users_list
             },
+            user(){
+                return this.$store.getters.user
+            },
         },
         mounted(){
             this.readExpenses();
@@ -147,7 +152,9 @@
                 this.loading_btn = true
                 requests.createExpenses(this.expenses).then(r => {
                     if (r.status == 200) {
-                        this.expenses = {}
+                        this.expenses = {
+                            user_id: this.user.user_id,
+                        }
                         this.rows.push(
                             r.data.new_data
                         )
@@ -215,6 +222,7 @@
             
             readExpenses() {
                 this.loading = true
+                this.expenses.user_id = this.user.user_id
                 requests.getAllExpenses().then(r => {
                     if (r.status == 200) {
                         this.rows = r.data.rows
