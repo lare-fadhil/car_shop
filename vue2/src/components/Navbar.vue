@@ -1,11 +1,16 @@
 
 <template>
-    <div>
+		<div v-if="$store.getters.auth.isAuth && $store.state.init_state">
         <v-app-bar app class="navbar">
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-btn icon="" to="/">
                 <v-icon>mdi-home</v-icon>
             </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon="" @click="logout">
+
+				<v-icon>mdi-logout</v-icon>
+			</v-btn>
             <v-app-bar-title>{{$store.getters.language.app_name}}</v-app-bar-title>
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" app :right="$store.getters.language.rtl">
@@ -78,7 +83,13 @@ export default {
             
             ]
         },
-    }
+    },
+    methods: {
+			logout() {
+				this.$store.dispatch('logout');
+			},
+
+		},
 }
 </script>
         

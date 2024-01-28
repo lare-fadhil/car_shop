@@ -12,6 +12,24 @@ const routes = [
             title : 'Home'
         }
     },
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import('./../views/Login.vue'),
+        meta: {
+            auth: false,
+            title: 'Login'
+        }
+    },
+    {
+        path: '/reset-password',
+        name: 'ResetPassword',
+        component: () => import('./../views/ResetPassword.vue'),
+        meta: {
+            auth: false,
+            title: 'Login'
+        }
+    },
     
         {
             path: '/car_items-list',
