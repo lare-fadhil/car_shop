@@ -35,6 +35,7 @@
 				}
 			})
 			this.$vuetify.rtl = true
+            
 		},
 		name: 'App',
 

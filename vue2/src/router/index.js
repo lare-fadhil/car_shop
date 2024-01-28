@@ -67,6 +67,15 @@ const routes = [
                 title : 'Cars Edit'
             }
         },
+            {
+            path: '/cars-info/:id',
+            name: 'CarsInfo',
+            component: () => import('./../views/Cars/CarInfo.vue'),
+            meta:{
+                auth : true,
+                title : 'Cars Info'
+            }
+        },
         {
             path: '/expenses-list',
             name: 'ListExpenses',
