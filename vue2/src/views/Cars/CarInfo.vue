@@ -109,17 +109,41 @@
                     headers: [
 
                     
+                    // {
+                    //     text: this.$store.getters.language.data.cars.car_id,
+                    //     align: 'start',
+                    //     sortable: true,
+                    //     value: 'car_id',
+                    // },
                     {
-                        text: this.$store.getters.language.data.cars.car_id,
+                        text: this.$store.getters.language.data.items.item_name,
                         align: 'start',
                         sortable: true,
-                        value: 'car_id',
+                        value: 'item_name',
                     },
                     {
-                        text: this.$store.getters.language.data.items.item_id,
+                        text: this.$store.getters.language.data.items.item_barcode,
                         align: 'start',
                         sortable: true,
-                        value: 'item_id',
+                        value: 'item_barcode',
+                    },
+                    {
+                        text: this.$store.getters.language.data.items.item_price,
+                        align: 'start',
+                        sortable: true,
+                        value: 'item_price',
+                    },
+                    {
+                        text: this.$store.getters.language.data.items.item_qty,
+                        align: 'start',
+                        sortable: true,
+                        value: 'item_qty',
+                    },
+                    {
+                        text: this.$store.getters.language.data.items.item_note,
+                        align: 'start',
+                        sortable: true,
+                        value: 'item_note',
                     },   {
             text: this.$store.getters.language.data.actions,
             align: 'start',

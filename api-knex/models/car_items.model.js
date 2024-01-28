@@ -24,7 +24,7 @@ class CarItems {
         return await db.select("*").table(table_name).where('car_item_id', id)
     }
     async getByColumn(column, value) {
-        return await db.select("*").table(table_name).where(column, value)
+        return await db.select("*").table('car_items_view').where(column, value)
     }
     async createList(data) {
         const insert = await db(table_name).insert(data)

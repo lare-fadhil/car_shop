@@ -61,7 +61,7 @@
 
 					{
 						path: '/invoices-list',
-						title: 'وەسڵەکان',
+						title: 'فڕۆشتن',
                         color_code: '#4CAF50'
 					},
 

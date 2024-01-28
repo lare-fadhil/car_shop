@@ -3,6 +3,8 @@
 	<div>
 		<v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
 		<v-container v-else class="my-2">
+			<h1 class="mt-4 mb-7">زیادکردنی ئۆتۆمبێل : </h1>
+
 			<form @submit.prevent="addCars" autocomplete="off">
 				<v-layout row wrap>
 
@@ -35,8 +37,8 @@
 			</form>
 			<v-layout row wrap mt-5>
 				<v-flex xs12>
-                    <v-text-field v-model="search" type="text" label="گەڕان" dense class="mx-1" filled outlined>
-                    </v-text-field>
+					<v-text-field v-model="search" type="text" label="گەڕان" dense class="mx-1" filled outlined>
+					</v-text-field>
 					<v-card>
 						<v-card-text>
 							<v-data-table :headers="headers" v-model="selected_rows" :search="search" :items="rows" class="elevation-0" item-key="car_id">
@@ -153,11 +155,11 @@
 			}
 		},
 		mounted() {
-           
-           
+
+
 			this.readCars();
-           
-           
+
+
 		},
 		methods: {
 			addCars() {
@@ -165,8 +167,8 @@
 				requests.createCars(this.cars).then(r => {
 					if (r.status == 200) {
 						this.cars = {
-                            user_id : this.user.user_id
-                        }
+							user_id: this.user.user_id
+						}
 						this.rows.push(
 							r.data.new_data
 						)
@@ -234,7 +236,7 @@
 
 			readCars() {
 				this.loading = true
-                this.cars.user_id = this.user.user_id
+				this.cars.user_id = this.user.user_id
 				requests.getAllCars().then(r => {
 					if (r.status == 200) {
 						this.rows = r.data.rows

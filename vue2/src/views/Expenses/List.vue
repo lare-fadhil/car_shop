@@ -123,10 +123,10 @@
                             value: 'expense_date',
                         },
                     {
-                        text: this.$store.getters.language.data.users.user_id,
+                        text: this.$store.getters.language.data.users.user_name,
                         align: 'start',
                         sortable: true,
-                        value: 'user_id',
+                        value: 'user_name',
                     },   {
             text: this.$store.getters.language.data.actions,
             align: 'start',

@@ -3,7 +3,7 @@ const db = require('../connection')
 const table_name = 'expenses'
 class Expenses {
     async getAll() {
-        return await db.select("*").table(table_name)
+        return await db.select("*").table('expenses_view')
     }
     async report(columns) {
         let query = "";
