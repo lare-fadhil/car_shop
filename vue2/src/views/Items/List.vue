@@ -8,31 +8,37 @@
 			<form @submit.prevent="addItems" autocomplete="off">
 				<v-layout row wrap>
 
-					<v-flex xs12 lg2 xl2 md3 sm4>
+					<v-flex xs12 lg4 xl4 md3 sm4>
+
 						<v-text-field v-model="items.item_name" type="text" :label="$store.getters.language.data.items.item_name" dense class="mx-1" filled outlined required>
 						</v-text-field>
 					</v-flex>
 
-					<v-flex xs12 lg2 xl2 md3 sm4>
+					<v-flex xs12 lg4 xl4 md3 sm4>
+
 						<v-text-field v-model="items.item_barcode" type="text" :label="$store.getters.language.data.items.item_barcode" dense class="mx-1" filled outlined required>
 						</v-text-field>
 					</v-flex>
 
-					<v-flex xs12 lg2 xl2 md3 sm4>
+					<v-flex xs12 lg4 xl4 md3 sm4>
+
 						<v-text-field v-model="items.item_price" type="text" :label="$store.getters.language.data.items.item_price" dense class="mx-1" filled outlined required>
 						</v-text-field>
 					</v-flex>
 
-					<v-flex xs12 lg2 xl2 md3 sm4>
+					<v-flex xs12 lg4 xl4 md3 sm4>
+
 						<v-text-field v-model="items.item_qty" type="number" :label="$store.getters.language.data.items.item_qty" dense class="mx-1" filled outlined required>
 						</v-text-field>
 					</v-flex>
 
-					<v-flex xs12 lg2 xl2 md3 sm4>
+					<v-flex xs12 lg4 xl4 md3 sm4>
+
 						<v-text-field v-model="items.item_note" type="text" :label="$store.getters.language.data.items.item_note" dense class="mx-1" filled outlined>
 						</v-text-field>
 					</v-flex>
-					<v-flex xs12 lg2 xl2 md3 sm4>
+					<v-flex xs12 lg4 xl4 md3 sm4>
+
 						<v-select class="mx-1" clearable :items="users" v-model="items.user_id" dense filled outlined item-text="user_name" item-value="user_id" :return-object="false" :label="$store.getters.language.data.users.user_name" disabled>
 						</v-select>
 					</v-flex>

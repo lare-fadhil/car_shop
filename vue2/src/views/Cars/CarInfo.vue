@@ -43,10 +43,16 @@
                                 </v-select>
                         </v-flex> -->
                 
-                        <v-flex xs12 lg2 xl2 md3 sm4>
-                                <v-select class="mx-1" clearable  :items="items" v-model="car_items.item_id" dense  filled outlined  item-text="item_name"
+                      <v-flex xs12 lg4 xl4 md3 sm4>
+                                <v-autocomplete class="mx-1" clearable  :items="items" v-model="car_items.item_id" dense  filled outlined  item-text="item_name"
                                     item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_name">
-                                </v-select>
+                                </v-autocomplete>
+                        </v-flex>
+                
+                      <v-flex xs12 lg4 xl4 md3 sm4>
+                                <v-autocomplete class="mx-1" clearable  :items="items" v-model="car_items.item_id" dense  filled outlined  item-text="item_barcode"
+                                    item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_barcode">
+                                </v-autocomplete>
                         </v-flex>
                 
                         <v-flex xs12 lg2 xl2 md2 sm4>
@@ -60,7 +66,7 @@
             <v-card-text>
                 <v-data-table :headers="headers"  :items="rows" class="elevation-0"
                     item-key="car_item_id">
-                    <template v-slot:[`item.car_item_id`]="{ item }">
+                    <!-- <template v-slot:[`item.car_item_id`]="{ item }">
                         <div>
                             <v-btn icon :to="'/car_items-list/'+item.car_item_id"  color="teal" class="mx-1">
                             <v-icon> mdi-pencil-outline </v-icon>
@@ -69,7 +75,7 @@
                                 <v-icon> mdi-delete-outline </v-icon>
                             </v-btn>
                         </div>
-                    </template>
+                    </template> -->
                 </v-data-table>
             </v-card-text>
             
@@ -145,10 +151,10 @@
                         sortable: true,
                         value: 'item_note',
                     },   {
-            text: this.$store.getters.language.data.actions,
-            align: 'start',
-            sortable: true,
-            value: 'car_item_id',
+            // text: this.$store.getters.language.data.actions,
+            // align: 'start',
+            // sortable: true,
+            // value: 'car_item_id',
         }
                 ],
 			}
