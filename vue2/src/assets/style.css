@@ -1,0 +1,76 @@
+.theme--dark.v-card {
+    background-color: #1d2330!important;
+    color: #FFFFFF;
+}
+.theme--dark.v-sheet {
+    background-color: #1d2330!important;
+    color: #FFFFFF;
+}
+
+.theme--dark.v-data-table {
+    background-color: #1d2330!important;
+    color: #FFFFFF!important;
+}
+.theme--dark.v-app-bar.v-toolbar.v-sheet {
+    background-color: #626ED4!important;
+}
+
+.theme--dark.v-navigation-drawer{
+    background-color: #1d2330!important;
+}
+
+.theme--dark.v-text-field--filled > .v-input__control > .v-input__slot {
+    background: #1d2330!important;
+    border: none!important;
+}
+
+
+
+.theme--dark.v-application {
+    background: #141821!important;
+    color: #FFFFFF!important;
+}
+.v-navigation-drawer__border{
+    display: none!important;
+}
+
+.v-list .v-list-item--active {
+    color: #7053F7;
+}
+.v-list.v-sheet.theme--dark {
+    padding: 0px;
+    
+    margin: 0px;
+}
+
+
+.v-btn {
+    border-radius: 4px!important;
+}
+.v-btn.v-size--default:not(.v-btn--fab) {
+    height: 40px !important;
+}
+
+.v-input{
+    border-radius: 4px!important;
+}
+
+/* Content of buttons */
+.v-btn__content {
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+.v-btn.v-size--default:not(.v-btn--fab) {
+    height: 40px !important;
+}
+
+.v-picker__body.theme--dark {
+    background: #1d2330 !important;
+}
+
+.en > *:not(i,.v-icon){
+    font-family: 'Noto Sans Arabic', sans-serif!important;
+}
+
+
