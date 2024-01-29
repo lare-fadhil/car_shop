@@ -3,6 +3,7 @@
 	<div>
 		<v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
 		<v-container v-else class="my-2">
+            <h1 class="mt-4 mb-7">فڕۆشتنەکان :</h1>
 			<form @submit.prevent="addInvoices" autocomplete="off">
 				<v-layout row wrap>
 					<v-flex xs12 lg2 xl2 md3 sm4>
@@ -30,7 +31,7 @@
 						</v-text-field>
 					</v-flex>
 					<v-flex xs12 lg2 xl2 md3 sm4>
-						<v-select class="mx-1" clearable :items="users" v-model="invoices.user_id" dense filled outlined item-text="user_id" item-value="user_id" :return-object="false" :label="$store.getters.language.data.users.user_id">
+						<v-select class="mx-1" clearable :items="users" v-model="invoices.user_id" dense filled outlined item-text="user_name" item-value="user_id" :return-object="false" :label="$store.getters.language.data.users.user_name" disabled>
 						</v-select>
 					</v-flex>
 
@@ -71,6 +72,7 @@
 					</v-flex>
 				</v-layout>
 			</form>
+            <h1>{{invoices.invoice_price - invoices.invoice_discount}}</h1>
 			<v-layout row wrap>
 				<!-- table for invoice_item_list -->
 				<table class="report-table">
@@ -197,9 +199,13 @@
 			},
 			items() {
 				return this.$store.getters.items_list
-			}
+			},
+            user() {
+                return this.$store.getters.user
+            }
 		},
 		mounted() {
+            this.invoices.user_id = this.user.user_id
 			this.readInvoices();
 		},
 		methods: {
@@ -246,7 +252,8 @@
 				requests.createInvoices(this.invoices).then(r => {
 					if (r.status == 200) {
 						this.invoices = {
-                            invoice_price: 0
+                            invoice_price: 0,
+                            user_id: this.user.user_id
                         }
 						this.rows.push(
 							r.data.new_data

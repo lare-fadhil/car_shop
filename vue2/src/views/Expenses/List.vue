@@ -3,6 +3,8 @@
     <div>
         <v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
             <v-container v-else class="my-2">
+                            			<h1 class="mt-4 mb-7">زیادکردنی خەرجی : </h1>
+
                 <form @submit.prevent="addExpenses" autocomplete="off">
                     <v-layout row wrap>
         
@@ -41,6 +43,12 @@
             <v-card-text>
                 <v-data-table :headers="headers" v-model="selected_rows"    :search="search" :items="rows" class="elevation-0"
                     item-key="expense_id">
+                    <!-- expense_date-->
+                    <template v-slot:[`item.expense_date`]="{ item }">
+                        <div>
+                            {{ new Date(item.expense_date).toISOString().split('T')[0]}} {{ new Date(item.expense_date).toISOString().split('T')[1].split('.')[0]}}
+                        </div>
+                    </template>
                     <template v-slot:[`item.expense_id`]="{ item }">
                         <div>
                             <v-btn icon :to="'/expenses-list/'+item.expense_id"  color="teal" class="mx-1">

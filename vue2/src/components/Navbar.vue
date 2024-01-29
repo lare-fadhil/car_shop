@@ -46,10 +46,10 @@ export default {
         navigation_links() {
             return [
                 
-                    {
-                        path : '/car_items-list',
-                        title : 'Car Items',
-                    },
+                    // {
+                    //     path : '/car_items-list',
+                    //     title : 'Car Items',
+                    // },
             
                     {
                         path : '/cars-list',
@@ -61,10 +61,10 @@ export default {
                         title : 'Expenses',
                     },
             
-                    {
-                        path : '/invoice_items-list',
-                        title : 'Invoice Items',
-                    },
+                    // {
+                    //     path : '/invoice_items-list',
+                    //     title : 'Invoice Items',
+                    // },
             
                     {
                         path : '/invoices-list',
