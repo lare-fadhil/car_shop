@@ -11,7 +11,7 @@
 					</v-flex>
 
 					<v-flex xs12 lg2 xl2 md3 sm4>
-						<v-text-field v-model="invoices.invoice_price" type="text" :label="$store.getters.language.data.invoices.invoice_price" dense class="mx-1" filled outlined required>
+						<v-text-field v-model="invoices.invoice_price" type="text" :label="$store.getters.language.data.invoices.invoice_price" dense class="mx-1" filled outlined required disabled>
 						</v-text-field>
 					</v-flex>
 
@@ -42,13 +42,17 @@
 			<form @submit.prevent="addInvoiceItems" autocomplete="off">
 				<v-layout row wrap>
 
-					<v-flex xs12 lg2 xl2 md3 sm4>
+					<!-- <v-flex xs12 lg2 xl2 md3 sm4>
 						<v-select class="mx-1" clearable :items="invoices" v-model="invoice_items.invoice_id" dense filled outlined item-text="invoice_id" item-value="invoice_id" :return-object="false" :label="$store.getters.language.data.invoices.invoice_id">
 						</v-select>
-					</v-flex>
+					</v-flex> -->
 
 					<v-flex xs12 lg2 xl2 md3 sm4>
-						<v-select class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense filled outlined item-text="item_id" item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_id">
+						<v-autocomplete class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense filled outlined item-text="item_name" item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_name">
+						</v-autocomplete>
+					</v-flex>
+					<v-flex xs12 lg2 xl2 md3 sm4>
+						<v-select class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense filled outlined item-text="item_barcode" item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_barcode">
 						</v-select>
 					</v-flex>
 
@@ -116,11 +120,16 @@
 </template>
 <script>
 	import requests from '../../requests/invoices.request.js'
+    import items_requests from '../../requests/invoice_items.request.js'
 	export default {
 		data() {
 			return {
-				invoices: {},
-				invoice_items: {},
+				invoices: {
+                    invoice_price: 0
+                },
+				invoice_items: {
+                    invoice_item_qty: 1
+                },
 				list_invoice_items: [],
 				list_invoice_items_view: [],
 				search: '',
@@ -196,7 +205,7 @@
 		methods: {
 			addInvoiceItems() {
 				// list_invoice_items
-				if (this.invoice_items.item_id != undefined  && this.invoice_items.invoice_item_qty != 0) {
+				if (this.invoice_items.item_id != undefined  && this.invoice_items.invoice_item_qty > 0) {
 					this.loading_btn = true
 					// search in items list to get item name and add it to list_invoice_items_view find the selected item
 					let item_detail = this.items.find(item => item.item_id == this.invoice_items.item_id)
@@ -211,13 +220,16 @@
 						// invoice_item_qty: this.invoice_items.invoice_item_qty
 					})
 					this.list_invoice_items.push(this.invoice_items)
-
+                    this.invoices.invoice_price = this.invoices.invoice_price + (this.invoice_items.invoice_item_price * this.invoice_items.invoice_item_qty)
 					this.loading_btn = false
 					this.snackbar = {
 						value: true,
 						text: 'زیادکرا',
 						color: 'success'
 					}
+                    this.invoice_items = {
+                        invoice_item_qty: 1
+                    }
 					return
 				}
 				else {
@@ -233,10 +245,17 @@
 				this.loading_btn = true
 				requests.createInvoices(this.invoices).then(r => {
 					if (r.status == 200) {
-						this.invoices = {}
+						this.invoices = {
+                            invoice_price: 0
+                        }
 						this.rows.push(
 							r.data.new_data
 						)
+                        // for all invoice_items in list_invoice_items add invoice_id
+                        this.list_invoice_items.forEach(item => {
+                            item.invoice_id = r.data.new_data.invoice_id
+                        })
+                        this.addInvoiceItemsList()
 						this.snackbar = {
 							value: true,
 							text: 'Invoices Added',
@@ -255,6 +274,33 @@
 					})
 
 			},
+            addInvoiceItemsList() {
+                this.loading_btn = true
+                items_requests.createInvoiceItemsList(
+                    {
+                        list: this.list_invoice_items
+                    }
+                ).then(r => {
+                    if (r.status == 200) {
+                        this.list_invoice_items = []
+                        this.list_invoice_items_view = []
+                        this.snackbar = {
+                            value: true,
+                            text: 'Invoice Items Added',
+                            color: 'success'
+                        }
+                    } else {
+                        this.snackbar = {
+                            value: true,
+                            text: 'Fail to add Invoice Items',
+                            color: 'error'
+                        }
+                    }
+                })
+                    .finally(() => {
+                        this.loading_btn = false
+                    })
+            },
 			deleteInvoices(invoice_id) {
 				requests.deleteInvoices(invoice_id).then(r => {
 					this.delete_dialog = false
