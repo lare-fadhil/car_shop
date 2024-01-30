@@ -1,13 +1,13 @@
 
 <template>
 	<v-app>
-		<div v-if="$store.getters.auth.isAuth && $store.state.init_state">
+		<!-- <div v-if="$store.getters.auth.isAuth && $store.state.init_state"> -->
 
 			<APPNavbar></APPNavbar>
 			<v-main>
 				<router-view />
 			</v-main>
-		</div>
+		<!-- </div> -->
 	</v-app>
 </template>
       
