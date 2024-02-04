@@ -39,14 +39,14 @@
 {
 						path: '/items-list',
 						title: 'کاڵاکان',
-                        color_code: '#3f51b5'
+                        color_code: '#231F20'
 					},
 					
 
 					{
 						path: '/cars-list',
-						title: 'ئۆتۆمۆبیلەکان',
-						color_code: '#FFC107'
+						title: 'ئۆتۆمبێلەکان',
+						color_code: '#F28705'
 					},
 // {
 // 						path: '/car_items-list',
@@ -56,13 +56,13 @@
 					{
 						path: '/expenses-list',
 						title: 'خەرجیەکان',
-                        color_code: '#607D8B'
+                        color_code: '#231F20'
 					},
 
 					{
 						path: '/invoices-list',
 						title: 'فڕۆشتن',
-                        color_code: '#4CAF50'
+                        color_code: '#F28705'
 					},
 
 					// {
