@@ -9,7 +9,7 @@ import './assets/main.css'
 
 Vue.config.productionTip = false
 import axios from 'axios'
-let api = 'http://localhost:3000/'
+let api = 'https://api.thepiston.net/'
 axios.defaults.baseURL = api;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
