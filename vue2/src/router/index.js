@@ -121,6 +121,15 @@ const routes = [
                 title : 'Invoices List'
             }
         },
+        {
+            path: '/invoices-view',
+            name: 'ListInvoices',
+            component: () => import('./../views/Invoices/View.vue'),
+            meta:{
+                auth : true,
+                title : 'Invoices List'
+            }
+        },
             {
             path: '/invoices-list/:id',
             name: 'ViewInvoices',

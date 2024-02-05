@@ -48,7 +48,7 @@
 											<v-icon> mdi-pencil-outline </v-icon>
 										</v-btn>
 										<v-btn icon :to="'/cars-info/'+item.car_id" color="primary" class="mx-1">
-											<v-icon> mdi-pencil-outline </v-icon>
+											<v-icon> mdi-eye </v-icon>
 										</v-btn>
 										<v-btn color="error" icon class="mx-1" @click="selectCars(item)">
 											<v-icon> mdi-delete-outline </v-icon>

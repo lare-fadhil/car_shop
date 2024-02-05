@@ -3,33 +3,43 @@
         <v-container fluid class="login-container">
             <v-layout row wrap class="d-flex  align-center justify-center">
                 
-                <v-flex xs12 lg4 xl4 class="bg-main-1 login-container d-flex align-center">
+				<v-flex xs12 lg12 xl12 class="bg-main-1 login-container d-flex align-center">
+                    <v-layout row wrap justify-space-around>
+							<v-flex sm12 md12 lg4 xl4>
+                              
+                                    <v-img class="d-flex mx-auto align-center" :src="logobw" 
+                                            alt="" />
+               
+                            </v-flex>
+							<v-flex sm12 md12 lg4 xl4>
                     <v-card width="100%" color="transparent" class="elevation-0 px-2">
                         <v-card-text class="mb-4 hidden-md-and-up">
                             <!-- <v-img class="d-flex mx-auto align-center" :src="logobw" max-width="200px" alt="" /> -->
                         </v-card-text>
                         <v-card-title  primary-title>
-                            <h1>Reset Password</h1>
+                            <h3 class="my-4">نوێکردنەوەی وشەی نهێنی</h3>
                         </v-card-title>
                         <v-card-subtitle>
-                            Enter your email to recover your account.
+                           ئیمەیڵەکەت بنوسە بۆ ناردنی لینکەکەی نوێکردنەوە
                         </v-card-subtitle>
                         <v-card-text class="mt-3">
                             <form @submit.prevent="login">
-                                <v-text-field dense autocomplete="false" prepend-inner-icon="far fa-envelope"
-                                    outlined filled placeholder="email" v-model="user.email">
+                                <v-text-field dense autocomplete="false" prepend-inner-icon="mdi-email"
+                                    outlined filled placeholder="ئیمەیڵەکەت بنوسە" v-model="user.email">
                                 </v-text-field>
-                                <v-btn type="submit"  block color="primary" :loading="btn_loading">Send Link</v-btn>
+                                <v-btn type="submit"  block color="#F28705" :loading="btn_loading">ناردنی ئیمەیڵ</v-btn>
                             </form>
                         </v-card-text>
                         <v-card-text class="text-center">
                             <h3>
-                                <v-btn to="/login" text>⬅️ Back to login</v-btn>
+                                <v-btn to="/login" text>⬅️گەڕانەوە بۆ چوونەژوورەوە</v-btn>
                             </h3>
                             <br>
                         </v-card-text>
 
                     </v-card>
+                            </v-flex>
+                    </v-layout>
                 </v-flex>
                 <v-flex xs12 lg8 xl8 class="   hidden-sm-and-down">
                     <div class="login-container align-center justify-center " style="height:100%">
@@ -49,9 +59,9 @@ import {auth , sendPasswordResetEmail} from '../firebase'
     export default {
         name: 'Login',
         data: () => ({
-            // logobw: require('./../assets/login-svg.svg'),
+            logobw: require('./../assets/logo.png'),
             user: {
-                email: 'larefadhil@gmail.com'
+                email: ''
             },
             btn_loading:false,
             msg : 'Wrong email or password',

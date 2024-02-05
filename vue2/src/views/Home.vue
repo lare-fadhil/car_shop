@@ -14,7 +14,7 @@
 						<v-card class="ma-3 rounded-lg " outlined :style="{borderColor: item.color_code}" style="border :3px solid" :to=item.path>
 							<v-card-title class="px-0" :style="{ color: item.color_code}">
 								<div class="ma-4 my-10" style="width:100%;">
-									<h1 class="text-center">{{item.title.toUpperCase()}}</h1>
+									<h2 class="text-center">{{item.title.toUpperCase()}}</h2>
 								</div>
 							</v-card-title>
 						</v-card>
@@ -63,6 +63,11 @@
 						path: '/invoices-list',
 						title: 'فڕۆشتن',
                         color_code: '#F28705'
+					},
+					{
+						path: '/invoices-view',
+						title: 'لیستی فڕۆشتنەکان',
+                        color_code: '#231F20'
 					},
 
 					// {

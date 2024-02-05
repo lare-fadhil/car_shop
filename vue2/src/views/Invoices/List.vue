@@ -310,11 +310,7 @@
 							item.invoice_id = r.data.new_data.invoice_id
 						})
 						this.addInvoiceItemsList()
-						this.snackbar = {
-							value: true,
-							text: 'Invoices Added',
-							color: 'success'
-						}
+						
 					} else {
 						this.snackbar = {
 							value: true,
@@ -345,11 +341,7 @@
 
 						this.list_invoice_items = []
 						this.list_invoice_items_view = []
-						this.snackbar = {
-							value: true,
-							text: 'Invoice Items Added',
-							color: 'success'
-						}
+						
 					} else {
 						this.snackbar = {
 							value: true,
