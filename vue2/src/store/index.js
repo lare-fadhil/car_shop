@@ -12,8 +12,8 @@ export default new Vuex.Store({
             isAuth: false,
             user: null
         },
-        user:{},
         init_state: false,
+        user:{},
 
         languages: languages,
         language: languages[1],

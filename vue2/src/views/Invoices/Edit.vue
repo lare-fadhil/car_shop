@@ -4,7 +4,7 @@
 		<v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
 		<v-container v-else class="my-2">
 			<h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
-			<form @submit.prevent="addInvoices" autocomplete="off" class="no-print">
+			<form @submit.prevent="updateInvoices" autocomplete="off" class="no-print">
 				<v-layout row wrap>
 					<v-flex xs12 lg4 xl4 md3 sm4>
 						<v-text-field v-model="invoices.invoice_name" type="text" :label="$store.getters.language.data.invoices.invoice_name" dense class="mx-1" filled outlined required>
@@ -136,7 +136,7 @@
 							<td>{{invoice_item.invoice_item_price * invoice_item.invoice_item_qty}}</td>
 							<!-- delete  -->
 							<td class="no-print">
-								<v-btn color="error" icon class="mx-1" @click="list_invoice_items_view.splice(index, 1) , list_invoice_items.splice(index, 1)">
+								<v-btn color="error" icon class="mx-1" @click="deleteInvoiceItems(invoice_item)">
 									<v-icon> mdi-delete-outline </v-icon>
 								</v-btn>
 							</td>
@@ -169,6 +169,7 @@
 <script>
 	import requests from '../../requests/invoices.request.js'
 	import items_requests from '../../requests/invoice_items.request.js'
+
 	export default {
 		data() {
 			return {
@@ -254,11 +255,70 @@
 			}
 		},
 		mounted() {
-            this.id = this.$route.params.id
+			this.id = this.$route.params.id
 			this.invoices.user_id = this.user.user_id
+
 			this.getOneInvoices();
 		},
 		methods: {
+            deleteInvoiceItems(invoice_item) {
+                this.loading_btn = true
+                this.invoices.invoice_price = this.invoices.invoice_price - (invoice_item.invoice_item_price * invoice_item.invoice_item_qty)
+                items_requests.deleteInvoiceItems(invoice_item.invoice_item_id).then(r => {
+                    if (r.status == 200) {
+                        this.updateInvoices()
+                        this.snackbar = {
+                            value: true,
+                            text: 'InvoiceItems Deleted',
+                            color: 'success'
+                        }
+                    } else {
+                        this.snackbar = {
+                            value: true,
+                            text: 'Delete Faild',
+                            color: 'error'
+                        }
+                    }
+                })
+                    .finally(() => {
+                        this.loading_btn = false
+                    })
+            },
+
+
+
+			updateInvoices() {
+				this.loading = true
+				delete this.invoices.invoice_date
+				requests.updateInvoices(this.id, this.invoices).then(r => {
+					if (r.status == 200) {
+						this.snackbar = {
+							value: true,
+							text: 'Invoices Updated',
+							color: 'success'
+						}
+						this.loading = false
+					} else {
+						this.snackbar = {
+							value: true,
+							text: 'Update Faild',
+							color: 'error'
+						}
+						this.loading = false
+					}
+				})
+					.catch(e => {
+						this.snackbar = {
+							value: true,
+							text: 'Update Faild',
+							color: 'error'
+						}
+						this.loading = false
+					})
+					.finally(() => {
+						this.loading = false
+					})
+			},
 			addInvoiceItems() {
 				// list_invoice_items
 				if (this.invoice_items.item_id != undefined && this.invoice_items.invoice_item_qty > 0) {
@@ -283,9 +343,10 @@
 						text: 'زیادکرا',
 						color: 'success'
 					}
-					this.invoice_items = {
-						invoice_item_qty: 1
-					}
+                        this.addInvoiceItemsDB()
+					// this.invoice_items = {
+					// 	invoice_item_qty: 1
+					// }
 					return
 				}
 				else {
@@ -297,7 +358,37 @@
 				}
 
 			},
-			addInvoices() {
+			addInvoiceItemsDB() {
+				this.loading_btn = true
+                this.invoice_items.invoice_id = this.id
+                console.log(this.invoice_items)
+                items_requests.createInvoiceItems(this.invoice_items).then(r => {
+					if (r.status == 200) {
+						this.invoice_items = {
+                            invoice_item_qty: 1
+                        }
+						this.rows.push(
+							r.data.new_data
+						)
+                        this.updateInvoices()
+						this.snackbar = {
+							value: true,
+							text: 'InvoiceItems Added',
+							color: 'success'
+						}
+					} else {
+						this.snackbar = {
+							value: true,
+							text: 'Fail to add InvoiceItems',
+							color: 'error'
+						}
+					}
+				})
+					.finally(() => {
+						this.loading_btn = false
+					})
+
+			}, addInvoices() {
 				this.loading_btn = true
 				requests.createInvoices(this.invoices).then(r => {
 					if (r.status == 200) {
@@ -311,7 +402,7 @@
 							item.invoice_id = r.data.new_data.invoice_id
 						})
 						this.addInvoiceItemsList()
-						
+
 					} else {
 						this.snackbar = {
 							value: true,
@@ -325,31 +416,58 @@
 					})
 
 			},
-                 getOneInvoices() {
-                this.loading = true
-                requests.getOneInvoices(this.id).then(r =>{
-                    if (r.status == 200) {
-                        this.invoices = r.data.row
-                        this.loading = false
-                    } else {
-                        this.snackbar = {
-                            value: true,
-                            text: 'Fail to read Invoices',
-                            color: 'error'
-                        }
-                    }
-                })
-                .catch(e => {
-                    this.snackbar = {
-                        value: true,
-                        text: 'Fail to read Invoices',
-                        color: 'error'
-                    }
-                })
-                .finally(() => {
-                    this.loading = false
-                })
-            },
+			getOneInvoices() {
+				this.loading = true
+				requests.getOneInvoices(this.id).then(r => {
+					if (r.status == 200) {
+						this.invoices = r.data.row
+						this.readInvoiceItems(this.id)
+						this.loading = false
+					} else {
+						this.snackbar = {
+							value: true,
+							text: 'Fail to read Invoices',
+							color: 'error'
+						}
+					}
+				})
+					.catch(e => {
+						this.snackbar = {
+							value: true,
+							text: 'Fail to read Invoices',
+							color: 'error'
+						}
+					})
+					.finally(() => {
+						this.loading = false
+					})
+			},
+			readInvoiceItems(id) {
+				this.loading = true
+				items_requests.getInvoiceItemsByColumn('invoice_id', id).then(r => {
+					if (r.status == 200) {
+						this.list_invoice_items_view = r.data.rows
+						this.loading = false
+					} else {
+						this.snackbar = {
+							value: true,
+							text: 'Fail to read Invoice Items',
+							color: 'error'
+						}
+					}
+				})
+					.catch(e => {
+						this.snackbar = {
+							value: true,
+							text: 'Fail to read Invoice Items',
+							color: 'error'
+						}
+					})
+					.finally(() => {
+						this.loading = false
+					})
+
+			},
 			addInvoiceItemsList() {
 				this.loading_btn = true
 				items_requests.createInvoiceItemsList(
@@ -367,7 +485,7 @@
 
 						this.list_invoice_items = []
 						this.list_invoice_items_view = []
-						
+
 					} else {
 						this.snackbar = {
 							value: true,

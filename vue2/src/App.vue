@@ -1,13 +1,19 @@
 
 <template>
 	<v-app>
-		<!-- <div v-if="$store.getters.auth.isAuth && $store.state.init_state"> -->
+		<div v-if="$store.getters.auth.isAuth && $store.state.init_state">
+			<APPNavbar class="no-print"> </APPNavbar>
+			<v-main>
+				<router-view class="mx-2" />
 
-			<APPNavbar></APPNavbar>
+			</v-main>
+		</div>
+		<div v-else-if="$store.state.init_state">
 			<v-main>
 				<router-view />
+
 			</v-main>
-		<!-- </div> -->
+		</div>
 	</v-app>
 </template>
       
@@ -24,6 +30,11 @@
 				return this.$store.getters.auth;
 			}
 		},
+        	name: 'App',
+
+		data: () => ({
+			//
+		}),
 		mounted() {
 			// this.$store.dispatch('init');
 			auth.onAuthStateChanged(user => {
@@ -37,11 +48,7 @@
 			this.$vuetify.rtl = true
             
 		},
-		name: 'App',
-
-		data: () => ({
-			//
-		}),
+	
 	};
 </script>
 

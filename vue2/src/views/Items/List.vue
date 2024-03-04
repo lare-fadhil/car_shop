@@ -3,6 +3,7 @@
 	<div>
 		<v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
 		<v-container v-else class="my-2">
+
 			<h1 class="mt-4 mb-7">زیادکردنی کاڵا : </h1>
 
 			<form @submit.prevent="addItems" autocomplete="off">
@@ -102,7 +103,9 @@
 	export default {
 		data() {
 			return {
-				items: {},
+				items: {
+                    user_id: 0,
+                },
 				search: '',
 				loading: true,
 				loading_btn: false,
@@ -171,7 +174,7 @@
 			}
 		},
 		mounted() {
-
+            this.items.user_id = this.user.user_id
 			this.readItems();
 		},
 		methods: {
@@ -251,10 +254,10 @@
 				this.loading = true
 
 
-				this.items.user_id = this.user.user_id
 
 				requests.getAllItems().then(r => {
-					if (r.status == 200) {
+                    if (r.status == 200) {
+                        this.items.user_id = this.user.user_id
 						this.rows = r.data.rows
 						this.loading = false
 

@@ -1,6 +1,6 @@
 
 <template>
-		<div v-if="$store.getters.auth.isAuth && $store.state.init_state">
+		<div>
         <v-app-bar app class="navbar no-print">
             <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
             <v-btn icon="" to="/">

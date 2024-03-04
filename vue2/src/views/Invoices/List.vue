@@ -3,9 +3,21 @@
 	<div>
 		<v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
 		<v-container v-else class="my-2">
-			<h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
 			<form @submit.prevent="addInvoices" autocomplete="off" class="no-print">
+            	
 				<v-layout row wrap>
+                     <v-flex xs12 lg12 xl12 md12 sm12>
+                                <div class="d-flex justify-space-between align-center">
+
+                    			<h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
+
+                    
+						<v-btn color="primary" :loading="loading_btn" type="submit">{{$store.getters.language.data.invoices.add_btn}}  
+                            <v-icon>mdi-invoice-check-outline</v-icon>
+
+                        </v-btn>
+                                </div>
+                     </v-flex>
 					<v-flex xs12 lg4 xl4 md3 sm4>
 						<v-text-field v-model="invoices.invoice_name" type="text" :label="$store.getters.language.data.invoices.invoice_name" dense class="mx-1" filled outlined required>
 						</v-text-field>
@@ -35,9 +47,7 @@
 						</v-select>
 					</v-flex>
 
-					<v-flex xs12 lg2 xl2 md2 sm4>
-						<v-btn color="primary" :loading="loading_btn" type="submit">{{$store.getters.language.data.invoices.add_btn}}</v-btn>
-					</v-flex>
+				
 				</v-layout>
 			</form>
 			<form @submit.prevent="addInvoiceItems" autocomplete="off" class="no-print">
@@ -68,7 +78,7 @@
 					</v-flex>
 
 					<v-flex xs12 lg2 xl2 md2 sm4>
-						<v-btn color="success" :loading="loading_btn" type="submit"><v-icon>mdi-plus</v-icon></v-btn>
+						<v-btn color="success" :loading="loading_btn" type="submit"><v-icon>mdi-plus</v-icon> زیادکردنی کاڵا بۆ وەسڵ</v-btn>
 					</v-flex>
 				</v-layout>
 			</form>
@@ -254,6 +264,9 @@
 			}
 		},
 		mounted() {
+            console.log(this.$store.getters.user)
+            console.log("this.$store.getters.user")
+            // this.incoices.user_id = this.$store.getters.user.user_id
 			this.invoices.user_id = this.user.user_id
 			this.readInvoices();
 		},
@@ -277,11 +290,11 @@
 					this.list_invoice_items.push(this.invoice_items)
 					this.invoices.invoice_price = this.invoices.invoice_price + (this.invoice_items.invoice_item_price * this.invoice_items.invoice_item_qty)
 					this.loading_btn = false
-					this.snackbar = {
-						value: true,
-						text: 'زیادکرا',
-						color: 'success'
-					}
+					// this.snackbar = {
+					// 	value: true,
+					// 	text: 'زیادکرا',
+					// 	color: 'success'
+					// }
 					this.invoice_items = {
 						invoice_item_qty: 1
 					}
