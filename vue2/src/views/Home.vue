@@ -69,6 +69,11 @@
 						title: 'لیستی فڕۆشتنەکان',
                         color_code: '#231F20'
 					},
+                    {
+                        path:'/report',
+                        title:'ڕاپۆرت',
+                        color_code:'#F28705'
+                    }
 
 					// {
 					// 	path: '/invoice_items-list',

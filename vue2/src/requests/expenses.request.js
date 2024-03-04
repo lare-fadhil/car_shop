@@ -18,8 +18,8 @@ export default {
             }
         })
     },
-    async reportExpenses(column , value)  {
-        return await axios.get(`expenses/report?${column}=${value}`)
+    async reportExpenses(params)  {
+        return await axios.post(`expenses/report` , params)
     },
     async getAllExpenses()  {
         return await axios.get(`expenses/all`)

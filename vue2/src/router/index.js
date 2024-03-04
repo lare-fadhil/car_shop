@@ -30,7 +30,15 @@ const routes = [
             title: 'Login'
         }
     },
-    
+    {
+        path:'/report',
+        name:'Report',
+        component: () => import('./../views/Reports/Reports.vue'),
+        meta:{
+            auth : true,
+            title : 'Report'
+        }
+    },
         {
             path: '/car_items-list',
             name: 'ListCar_items',

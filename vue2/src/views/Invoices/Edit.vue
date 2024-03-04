@@ -3,9 +3,17 @@
 	<div>
 		<v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
 		<v-container v-else class="my-2">
-			<h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
 			<form @submit.prevent="updateInvoices" autocomplete="off" class="no-print">
 				<v-layout row wrap>
+					<v-flex xs12 lg12 xl12 md12 sm12>
+						<div class="d-flex justify-space-between align-center">
+
+							<h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
+
+							<v-btn color="primary" :loading="loading_btn" type="submit">{{$store.getters.language.data.invoices.update_btn}}</v-btn>
+						</div>
+					</v-flex>
+
 					<v-flex xs12 lg4 xl4 md3 sm4>
 						<v-text-field v-model="invoices.invoice_name" type="text" :label="$store.getters.language.data.invoices.invoice_name" dense class="mx-1" filled outlined required>
 						</v-text-field>
@@ -35,9 +43,6 @@
 						</v-select>
 					</v-flex>
 
-					<v-flex xs12 lg2 xl2 md2 sm4>
-						<v-btn color="primary" :loading="loading_btn" type="submit">{{$store.getters.language.data.invoices.add_btn}}</v-btn>
-					</v-flex>
 				</v-layout>
 			</form>
 			<form @submit.prevent="addInvoiceItems" autocomplete="off" class="no-print">
@@ -68,7 +73,7 @@
 					</v-flex>
 
 					<v-flex xs12 lg2 xl2 md2 sm4>
-						<v-btn color="success" :loading="loading_btn" type="submit"><v-icon>mdi-plus</v-icon></v-btn>
+						<v-btn color="success" :loading="loading_btn" type="submit"><v-icon>mdi-plus</v-icon> زیادکردنی کاڵا بۆ وەسڵ</v-btn>
 					</v-flex>
 				</v-layout>
 			</form>
@@ -261,29 +266,29 @@
 			this.getOneInvoices();
 		},
 		methods: {
-            deleteInvoiceItems(invoice_item) {
-                this.loading_btn = true
-                this.invoices.invoice_price = this.invoices.invoice_price - (invoice_item.invoice_item_price * invoice_item.invoice_item_qty)
-                items_requests.deleteInvoiceItems(invoice_item.invoice_item_id).then(r => {
-                    if (r.status == 200) {
-                        this.updateInvoices()
-                        this.snackbar = {
-                            value: true,
-                            text: 'InvoiceItems Deleted',
-                            color: 'success'
-                        }
-                    } else {
-                        this.snackbar = {
-                            value: true,
-                            text: 'Delete Faild',
-                            color: 'error'
-                        }
-                    }
-                })
-                    .finally(() => {
-                        this.loading_btn = false
-                    })
-            },
+			deleteInvoiceItems(invoice_item) {
+				this.loading_btn = true
+				this.invoices.invoice_price = this.invoices.invoice_price - (invoice_item.invoice_item_price * invoice_item.invoice_item_qty)
+				items_requests.deleteInvoiceItems(invoice_item.invoice_item_id).then(r => {
+					if (r.status == 200) {
+						this.updateInvoices()
+						this.snackbar = {
+							value: true,
+							text: 'InvoiceItems Deleted',
+							color: 'success'
+						}
+					} else {
+						this.snackbar = {
+							value: true,
+							text: 'Delete Faild',
+							color: 'error'
+						}
+					}
+				})
+					.finally(() => {
+						this.loading_btn = false
+					})
+			},
 
 
 
@@ -297,6 +302,8 @@
 							text: 'Invoices Updated',
 							color: 'success'
 						}
+                        // reload the page
+                        window.location.reload()
 						this.loading = false
 					} else {
 						this.snackbar = {
@@ -343,7 +350,7 @@
 						text: 'زیادکرا',
 						color: 'success'
 					}
-                        this.addInvoiceItemsDB()
+					this.addInvoiceItemsDB()
 					// this.invoice_items = {
 					// 	invoice_item_qty: 1
 					// }
@@ -360,17 +367,17 @@
 			},
 			addInvoiceItemsDB() {
 				this.loading_btn = true
-                this.invoice_items.invoice_id = this.id
-                console.log(this.invoice_items)
-                items_requests.createInvoiceItems(this.invoice_items).then(r => {
+				this.invoice_items.invoice_id = this.id
+				console.log(this.invoice_items)
+				items_requests.createInvoiceItems(this.invoice_items).then(r => {
 					if (r.status == 200) {
 						this.invoice_items = {
-                            invoice_item_qty: 1
-                        }
+							invoice_item_qty: 1
+						}
 						this.rows.push(
 							r.data.new_data
 						)
-                        this.updateInvoices()
+						this.updateInvoices()
 						this.snackbar = {
 							value: true,
 							text: 'InvoiceItems Added',

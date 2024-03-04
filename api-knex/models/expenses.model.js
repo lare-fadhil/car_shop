@@ -7,26 +7,26 @@ class Expenses {
     }
     async report(columns) {
         let query = "";
-                
-        if (columns.expense_amount) {
-            query += ` AND expense_amount = '${columns.expense_amount}'`
+        let data = {}
+        if (columns.from && columns.to) {
+            query += ` AND expense_date BETWEEN '${columns.from}' AND '${columns.to}'`
         }
-            
-        if (columns.expense_note) {
-            query += ` AND expense_note = '${columns.expense_note}'`
-        }
-            
-        if (columns.expense_date) {
-            query += ` AND expense_date = '${columns.expense_date}'`
-        }
-            
+
+       
         if (columns.user_id) {
             query += ` AND user_id = '${columns.user_id}'`
         }
             
-        return await db.raw(`SELECT * FROM ${table_name} WHERE 1=1 ${query}`).then(data => {
-            return data[0]
-        })
+       data.expenses = await db.raw(`SELECT * FROM expenses_view WHERE 1=1 ${query}`)
+         .then(data => {
+              return data[0]
+         })
+         data.total = await db.raw(`SELECT SUM(expense_amount) as total FROM expenses_view WHERE 1=1 ${query}`)
+            .then(data => {
+                return data[0]
+            })
+            console.log(data)
+        return data
     }
     async getById(id) {
         return await db.select("*").table(table_name).where('expense_id', id)

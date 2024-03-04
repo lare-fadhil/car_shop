@@ -44,12 +44,13 @@
 							<v-data-table :headers="headers" v-model="selected_rows" :search="search" :items="rows" class="elevation-0" item-key="car_id">
 								<template v-slot:[`item.car_id`]="{ item }">
 									<div>
+                                        <v-btn  :to="'/cars-info/'+item.car_id" color="primary" class="mx-1">
+											پارچەکان
+										</v-btn>
 										<v-btn icon :to="'/cars-list/'+item.car_id" color="teal" class="mx-1">
 											<v-icon> mdi-pencil-outline </v-icon>
 										</v-btn>
-										<v-btn icon :to="'/cars-info/'+item.car_id" color="primary" class="mx-1">
-											<v-icon> mdi-eye </v-icon>
-										</v-btn>
+										
 										<v-btn color="error" icon class="mx-1" @click="selectCars(item)">
 											<v-icon> mdi-delete-outline </v-icon>
 										</v-btn>
@@ -132,12 +133,13 @@
 						sortable: true,
 						value: 'car_note',
 					},
-					{
-						text: this.$store.getters.language.data.users.user_id,
-						align: 'start',
-						sortable: true,
-						value: 'user_id',
-					}, {
+					// {
+					// 	text: this.$store.getters.language.data.users.user_name,
+					// 	align: 'start',
+					// 	sortable: true,
+					// 	value: 'user_name',
+					// }, 
+                    {
 						text: this.$store.getters.language.data.actions,
 						align: 'start',
 						sortable: true,

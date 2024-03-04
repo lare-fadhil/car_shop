@@ -17,7 +17,8 @@ class ExpensesController {
     }
     report = () => {
         return (req, res, next) => {
-            Expenses.report(req.query).then(data => {
+            const query = req.body
+            Expenses.report(query).then(data => {
                 res.status(200).json(data)
             }).catch(err => {
                 res.status(400).json(err)

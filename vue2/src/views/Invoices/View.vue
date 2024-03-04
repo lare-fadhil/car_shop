@@ -5,7 +5,7 @@
 		<v-container v-else class="my-2">
 	
 			<v-layout row wrap mt-5>
-                <h1 class="mb-6">لیستی فڕۆشتنەکان (کارکردن تیایدا تەواو نەبووە)</h1>
+                <h1 class="mb-6">لیستی فڕۆشتنەکان</h1>
 				<v-flex xs12>
 					<v-card>
                         <v-text-field v-model="search" type="text" label="گەڕان" dense class="mx-1" filled outlined>
@@ -98,6 +98,12 @@
 						value: 'invoice_discount',
 					},
 					{
+						text: 'نرخی کۆتایی',
+						align: 'start',
+						sortable: true,
+						value: 'final_price',
+					},
+					{
 						text: this.$store.getters.language.data.invoices.invoice_date,
 						align: 'start',
 						sortable: true,
@@ -110,10 +116,10 @@
 						value: 'invoice_note',
 					},
 					{
-						text: this.$store.getters.language.data.users.user_id,
+						text: this.$store.getters.language.data.users.user_name,
 						align: 'start',
 						sortable: true,
-						value: 'user_id',
+						value: 'user_name',
 					}, {
 						text: this.$store.getters.language.data.actions,
 						align: 'start',
