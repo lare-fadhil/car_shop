@@ -11,6 +11,11 @@
 							<h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
 
 							<v-btn color="primary" :loading="loading_btn" type="submit">{{$store.getters.language.data.invoices.update_btn}}</v-btn>
+                            <!-- btn for print -->
+                            <v-btn color="primary" @click="print()" class="mx-1" type="button">
+                                <v-icon>mdi-printer</v-icon>
+                                چاپکردن
+                            </v-btn>
 						</div>
 					</v-flex>
 
@@ -266,6 +271,15 @@
 			this.getOneInvoices();
 		},
 		methods: {
+            print() {
+                const theme = this.$vuetify.theme.isDark
+                this.$vuetify.theme.isDark = false
+                setTimeout(() => {
+                    window.print()
+                    this.$vuetify.theme.isDark = theme
+
+                }, 1000)
+            },
 			deleteInvoiceItems(invoice_item) {
 				this.loading_btn = true
 				this.invoices.invoice_price = this.invoices.invoice_price - (invoice_item.invoice_item_price * invoice_item.invoice_item_qty)

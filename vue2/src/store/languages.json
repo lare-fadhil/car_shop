@@ -207,6 +207,7 @@
                 "update_btn": "نوێکردنەوی فڕۆشتن",
                 "delete_btn": "سڕینەوەی فڕۆشتن",
                 "edit_btn": "دەستکاریکردن",
+                "final_price": "نرخی کۆتایی",
                 "remove_btn": "سڕینەوە",
                 "delete_list_btn": "Delete Selected Invoices",
                 "delete_question": "Are You Sure? You Want To Delete This Invoices",
@@ -300,7 +301,14 @@
                         "id": 1,
                         "query": "ناوی بەکارهێنەر",
                         "optional": "date from / date to"
+                    },
+                    {
+                        "title": "فڕۆشتنەکان",
+                        "id": 2,
+                        "query": "ناوی بەکارهێنەر",
+                        "optional": "date from / date to"
                     }
+                   
                 ]
             }
         }

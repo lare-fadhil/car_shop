@@ -74,6 +74,7 @@
 			</v-layout>
 		</v-container>
         <ExpensesReport :query="query" v-if="selectedReport == 1 && !loading"></ExpensesReport>
+        <InvoiceReport :query="query" v-if="selectedReport == 2 && !loading"></InvoiceReport>
 		<!-- 
 		<IncomesReport :query="query" v-if="selectedReport == 2 && !loading"></IncomesReport>
 		<DepositsReport :query="query" v-if="selectedReport == 3 && !loading"></DepositsReport>
@@ -90,6 +91,7 @@
 
 <script>
 	import ExpensesReport from './Expenses.vue'
+    import InvoiceReport from './Invoices.vue'
 	// import IncomesReport from './Reports/Income.vue'
 	// import DepositsReport from './Reports/Deposits.vue'
 	// import WithdrawsReport from './Reports/Withdraw'
@@ -104,6 +106,7 @@
 	export default {
 		components: {
             ExpensesReport,
+            InvoiceReport,
 			// , IncomesReport, DepositsReport, WithdrawsReport, InstructorReport, StudentSubjectReport, StudentReport, AccountReport, AllAccounts, AllInstructors, AllStudents
 			// CustomerReport
 		},

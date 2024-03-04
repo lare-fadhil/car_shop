@@ -4,7 +4,7 @@ const app = express()
 const Controller = require('../controllers/invoices.controller')
 const jwt = require('./jwt')
 
-app.get('/report',Controller.report())
+app.post('/report',Controller.report())
 app.get('/all',Controller.getAll())
 app.get('/all/:id',Controller.getById())
 app.get('/filter',Controller.getByColumn())

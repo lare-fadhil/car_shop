@@ -7,34 +7,25 @@ class Invoices {
     }
     async report(columns) {
         let query = "";
-                
-        if (columns.invoice_name) {
-            query += ` AND invoice_name = '${columns.invoice_name}'`
-        }
-            
-        if (columns.invoice_price) {
-            query += ` AND invoice_price = '${columns.invoice_price}'`
-        }
-            
-        if (columns.invoice_discount) {
-            query += ` AND invoice_discount = '${columns.invoice_discount}'`
-        }
-            
-        if (columns.invoice_date) {
-            query += ` AND invoice_date = '${columns.invoice_date}'`
-        }
-            
-        if (columns.invoice_note) {
-            query += ` AND invoice_note = '${columns.invoice_note}'`
+        let data = {};
+        if (columns.from && columns.to) {
+            query += ` AND invoice_date BETWEEN '${columns.from}' AND '${columns.to}'`
         }
             
         if (columns.user_id) {
             query += ` AND user_id = '${columns.user_id}'`
         }
             
-        return await db.raw(`SELECT * FROM ${table_name} WHERE 1=1 ${query}`).then(data => {
-            return data[0]
-        })
+        data.invoices = await db.raw(`SELECT * FROM invoices_view WHERE 1=1 ${query}`)
+            .then(data => {
+                return data[0]
+            })
+        data.total = await db.raw(`SELECT SUM(final_price) as total, SUM(invoice_price) as total_invoice_price, SUM(invoice_discount) as total_invoice_discount
+         FROM invoices_view WHERE 1=1 ${query}`)
+            .then(data => {
+                return data[0]
+            })
+       return data
     }
     async getById(id) {
         return await db.select("*").table(table_name).where('invoice_id', id)
