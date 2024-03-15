@@ -52,16 +52,38 @@
 			</form>
 			<form @submit.prevent="addInvoiceItems" autocomplete="off" class="no-print">
 				<v-layout row wrap>
+<v-flex xs12 lg4 xl4 md3 sm4>
+    <v-autocomplete
+        class="mx-1"
+        clearable
+        :items="items"
+        v-model="invoice_items.item_id"
+        dense
+        filled
+        outlined
+        item-text="item_name"
+        item-value="item_id"
+        :return-object="false"
+        :label="$store.getters.language.data.items.item_name"
+    >
+        <template #item="{ item }">
+            <div>
+                <div>{{ item.item_name }}</div>
+                <div class="caption text--secondary">{{ item.item_note }}</div>
+            </div>
+        </template>
+    </v-autocomplete>
+</v-flex>
 
 					<!-- <v-flex xs12 lg4 xl4 md3 sm4>
 						<v-select class="mx-1" clearable :items="invoices" v-model="invoice_items.invoice_id" dense filled outlined item-text="invoice_id" item-value="invoice_id" :return-object="false" :label="$store.getters.language.data.invoices.invoice_id">
 						</v-select>
 					</v-flex> -->
 
-					<v-flex xs12 lg4 xl4 md3 sm4>
+					<!-- <v-flex xs12 lg4 xl4 md3 sm4>
 						<v-autocomplete class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense filled outlined item-text="item_name" item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_name">
 						</v-autocomplete>
-					</v-flex>
+					</v-flex> -->
 					<v-flex xs12 lg4 xl4 md3 sm4>
 						<v-autocomplete class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense filled outlined item-text="item_barcode" item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_barcode">
 						</v-autocomplete>
@@ -131,6 +153,7 @@
 							<!-- <th>Invoice ID</th> -->
 							<th>ناوی کاڵا</th>
 							<th>بارکۆد</th>
+                            <th>تێبینی</th>
 							<th>نرخ</th>
 							<th>عەدەد</th>
 							<th>کۆی گشتی</th>
@@ -141,6 +164,7 @@
 							<!-- <td>{{invoice_item.invoice_id}}</td> -->
 							<td>{{invoice_item.item_name}}</td>
 							<td>{{invoice_item.item_barcode}}</td>
+                            <td>{{invoice_item.item_note}}</td>
 							<td>{{invoice_item.invoice_item_price}}</td>
 							<td>{{invoice_item.invoice_item_qty}}</td>
 							<td>{{invoice_item.invoice_item_price * invoice_item.invoice_item_qty}}</td>
@@ -281,6 +305,7 @@
 					// add item name to list_invoice_items_view
 					this.list_invoice_items_view.push({
 						item_name: item_detail.item_name,
+                        item_note: item_detail.item_note,
 						item_barcode: item_detail.item_barcode,
 						invoice_item_price: this.invoice_items.invoice_item_price,
 						invoice_item_qty: this.invoice_items.invoice_item_qty
