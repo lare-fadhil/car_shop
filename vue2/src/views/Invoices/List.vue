@@ -1,211 +1,230 @@
 
 <template>
-	<div>
-		<v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
-		<v-container v-else class="my-2">
-			<form @submit.prevent="addInvoices" autocomplete="off" class="no-print">
-            	
-				<v-layout row wrap>
-                     <v-flex xs12 lg12 xl12 md12 sm12>
-                                <div class="d-flex justify-space-between align-center">
+    <div>
+        <v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
+        <v-container v-else class="my-2">
+            <form @submit.prevent="addInvoices" autocomplete="off" class="no-print">
 
-                    			<h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
+                <v-layout row wrap>
+                    <v-flex xs12 lg12 xl12 md12 sm12>
+                        <div class="d-flex justify-space-between align-center">
 
-                    
-						<v-btn color="primary" :loading="loading_btn" type="submit">{{$store.getters.language.data.invoices.add_btn}}  
-                            <v-icon>mdi-invoice-check-outline</v-icon>
+                            <h1 class="mt-4 mb-7 no-print">فڕۆشتنەکان :</h1>
 
-                        </v-btn>
-                                </div>
-                     </v-flex>
-					<v-flex xs12 lg4 xl4 md3 sm4>
-						<v-text-field v-model="invoices.invoice_name" type="text" :label="$store.getters.language.data.invoices.invoice_name" dense class="mx-1" filled outlined required>
-						</v-text-field>
-					</v-flex>
 
-					<v-flex xs12 lg4 xl4 md3 sm4>
-						<v-text-field v-model="invoices.invoice_price" type="text" :label="$store.getters.language.data.invoices.invoice_price" dense class="mx-1" filled outlined required disabled>
-						</v-text-field>
-					</v-flex>
+                            <v-btn color="primary" :loading="loading_btn"
+                                type="submit">{{$store.getters.language.data.invoices.add_btn}}
+                                <v-icon>mdi-invoice-check-outline</v-icon>
 
-					<v-flex xs12 lg4 xl4 md3 sm4>
-						<v-text-field v-model="invoices.invoice_discount" type="text" :label="$store.getters.language.data.invoices.invoice_discount" dense class="mx-1" filled outlined required>
-						</v-text-field>
-					</v-flex>
+                            </v-btn>
+                        </div>
+                    </v-flex>
+                    <v-flex xs12 lg4 xl4 md3 sm4>
+                        <v-text-field v-model="invoices.invoice_name" type="text"
+                            :label="$store.getters.language.data.invoices.invoice_name" dense class="mx-1" filled
+                            outlined required>
+                        </v-text-field>
+                    </v-flex>
 
-					<!-- <v-flex xs12 lg4 xl4 md3 sm4>
+                    <v-flex xs12 lg4 xl4 md3 sm4>
+                        <v-text-field v-model="invoices.invoice_price" type="text"
+                            :label="$store.getters.language.data.invoices.invoice_price" dense class="mx-1" filled
+                            outlined required disabled>
+                        </v-text-field>
+                    </v-flex>
+
+                    <v-flex xs12 lg4 xl4 md3 sm4>
+                        <v-text-field v-model="invoices.invoice_discount" type="text"
+                            :label="$store.getters.language.data.invoices.invoice_discount" dense class="mx-1" filled
+                            outlined required>
+                        </v-text-field>
+                    </v-flex>
+
+                    <!-- <v-flex xs12 lg4 xl4 md3 sm4>
                         <v-text-field v-model="invoices.invoice_date" type="datetime-local" :label="$store.getters.language.data.invoices.invoice_date" dense
                             class="mx-1"  filled outlined >
                         </v-text-field>
                     </v-flex> -->
-					<v-flex xs12 lg4 xl4 md3 sm4>
-						<v-text-field v-model="invoices.invoice_note" type="text" :label="$store.getters.language.data.invoices.invoice_note" dense class="mx-1" filled outlined>
-						</v-text-field>
-					</v-flex>
-					<v-flex xs12 lg4 xl4 md3 sm4>
-						<v-select class="mx-1" clearable :items="users" v-model="invoices.user_id" dense filled outlined item-text="user_name" item-value="user_id" :return-object="false" :label="$store.getters.language.data.users.user_name" disabled>
-						</v-select>
-					</v-flex>
+                    <v-flex xs12 lg4 xl4 md3 sm4>
+                        <v-text-field v-model="invoices.invoice_note" type="text"
+                            :label="$store.getters.language.data.invoices.invoice_note" dense class="mx-1" filled
+                            outlined>
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex xs12 lg4 xl4 md3 sm4>
+                        <v-select class="mx-1" clearable :items="users" v-model="invoices.user_id" dense filled outlined
+                            item-text="user_name" item-value="user_id" :return-object="false"
+                            :label="$store.getters.language.data.users.user_name" disabled>
+                        </v-select>
+                    </v-flex>
 
-				
-				</v-layout>
-			</form>
-			<form @submit.prevent="addInvoiceItems" autocomplete="off" class="no-print">
-				<v-layout row wrap>
-<v-flex xs12 lg4 xl4 md3 sm4>
-    <v-autocomplete
-        class="mx-1"
-        clearable
-        :items="items"
-        v-model="invoice_items.item_id"
-        dense
-        filled
-        outlined
-        item-text="item_name"
-        item-value="item_id"
-        :return-object="false"
-        :label="$store.getters.language.data.items.item_name"
-    >
-        <template #item="{ item }">
-            <div>
-                <div>{{ item.item_name }}</div>
-                <div class="caption text--secondary">{{ item.item_note }}</div>
-            </div>
-        </template>
-    </v-autocomplete>
-</v-flex>
 
-					<!-- <v-flex xs12 lg4 xl4 md3 sm4>
+                </v-layout>
+            </form>
+            <form @submit.prevent="addInvoiceItems" autocomplete="off" class="no-print">
+                <v-layout row wrap>
+                    <v-flex xs12 lg4 xl4 md3 sm4>
+                        <v-autocomplete class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense
+                            filled outlined item-text="item_name" item-value="item_id" :return-object="false"
+                            :label="$store.getters.language.data.items.item_name">
+                            <template #item="{ item }">
+                                <div>
+                                    <div>{{ item.item_name }}</div>
+                                    <div class="caption text--secondary">{{ item.item_note }}</div>
+                                </div>
+                            </template>
+                        </v-autocomplete>
+                    </v-flex>
+
+                    <!-- <v-flex xs12 lg4 xl4 md3 sm4>
 						<v-select class="mx-1" clearable :items="invoices" v-model="invoice_items.invoice_id" dense filled outlined item-text="invoice_id" item-value="invoice_id" :return-object="false" :label="$store.getters.language.data.invoices.invoice_id">
 						</v-select>
 					</v-flex> -->
 
-					<!-- <v-flex xs12 lg4 xl4 md3 sm4>
+                    <!-- <v-flex xs12 lg4 xl4 md3 sm4>
 						<v-autocomplete class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense filled outlined item-text="item_name" item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_name">
 						</v-autocomplete>
 					</v-flex> -->
-					<v-flex xs12 lg4 xl4 md3 sm4>
-						<v-autocomplete class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense filled outlined item-text="item_barcode" item-value="item_id" :return-object="false" :label="$store.getters.language.data.items.item_barcode">
-						</v-autocomplete>
-					</v-flex>
+                    <v-flex xs12 lg4 xl4 md3 sm4>
+                        <v-autocomplete class="mx-1" clearable :items="items" v-model="invoice_items.item_id" dense
+                            filled outlined item-text="item_barcode" item-value="item_id" :return-object="false"
+                            :label="$store.getters.language.data.items.item_barcode">
+                        </v-autocomplete>
+                    </v-flex>
 
-					<!-- <v-flex xs12 lg4 xl4 md3 sm4>
+                    <!-- <v-flex xs12 lg4 xl4 md3 sm4>
 						<v-text-field v-model="invoice_items.invoice_item_price" type="text" :label="$store.getters.language.data.invoice_items.invoice_item_price" dense class="mx-1" filled outlined required>
 						</v-text-field>
 					</v-flex> -->
 
-					<v-flex xs12 lg2 xl2 md3 sm4>
-						<v-text-field v-model="invoice_items.invoice_item_qty" type="number" :label="$store.getters.language.data.invoice_items.invoice_item_qty" dense class="mx-1" filled outlined required>
-						</v-text-field>
-					</v-flex>
+                    <v-flex xs12 lg2 xl2 md3 sm4>
+                        <v-text-field v-model="invoice_items.invoice_item_qty" type="number"
+                            :label="$store.getters.language.data.invoice_items.invoice_item_qty" dense class="mx-1"
+                            filled outlined required>
+                        </v-text-field>
+                    </v-flex>
 
-					<v-flex xs12 lg2 xl2 md2 sm4>
-						<v-btn color="success" :loading="loading_btn" type="submit"><v-icon>mdi-plus</v-icon> زیادکردنی کاڵا بۆ وەسڵ</v-btn>
-					</v-flex>
-				</v-layout>
-			</form>
-			<v-layout row wrap>
-				<table style="width:100%">
-					<tbody>
-						<tr>
-							<td>
-								<p>{{$store.getters.language.data.invoices.invoice_name}} : {{invoices.invoice_name}}</p>
-							</td>
-							<td>
-								<p>{{$store.getters.language.data.invoices.invoice_id}} : {{id}}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>{{$store.getters.language.data.invoices.user_id}} : {{user_name}}</p>
-							</td>
-							<td>
-								<p>{{$store.getters.language.data.invoices.invoice_date}} : {{new Date ().toLocaleDateString()}}</p>
+                    <v-flex xs12 lg2 xl2 md2 sm4>
+                        <v-btn color="success" :loading="loading_btn" type="submit"><v-icon>mdi-plus</v-icon> زیادکردنی
+                            کاڵا بۆ وەسڵ</v-btn>
+                    </v-flex>
+                </v-layout>
+            </form>
+            <v-layout row wrap>
+                <v-flex xs12 lg9 xl9 md9 sm12>
+                    <table style="width:100%" class="mt-7">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>{{$store.getters.language.data.invoices.invoice_name}} :
+                                        {{invoices.invoice_name}}</p>
+                                </td>
+                                <td>
+                                    <p>{{$store.getters.language.data.invoices.invoice_id}} : {{id}}</p>
+                                </td>
 
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>{{$store.getters.language.data.invoices.invoice_price}} : {{invoices.invoice_price}}</p>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>{{$store.getters.language.data.invoices.user_id}} : {{user_name}}</p>
+                                </td>
+                                <td>
+                                    <p>{{$store.getters.language.data.invoices.invoice_date}} : {{new Date
+                                        ().toLocaleDateString()}}</p>
 
-							</td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>{{$store.getters.language.data.invoices.invoice_price}} :
+                                        {{invoices.invoice_price}}</p>
 
-							<td>
-								<p>{{$store.getters.language.data.invoices.invoice_discount}} : {{invoices.invoice_discount}}</p>
+                                </td>
 
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>نرخی کۆتایی : {{invoices.invoice_price - invoices.invoice_discount}}</p>
-							</td>
-						</tr>
+                                <td>
+                                    <p>{{$store.getters.language.data.invoices.invoice_discount}} :
+                                        {{invoices.invoice_discount}}</p>
 
-					</tbody>
-				</table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>نرخی کۆتایی : {{invoices.invoice_price - invoices.invoice_discount}}</p>
+                                </td>
+                            </tr>
 
-			</v-layout>
-			<v-layout row wrap>
-				<!-- table for invoice_item_list -->
-				<table class="report-table">
-					<thead>
-						<tr>
-							<!-- <th>Invoice ID</th> -->
-							<th>ناوی کاڵا</th>
-							<th>بارکۆد</th>
+                        </tbody>
+                    </table>
+                </v-flex>
+             <v-flex xs12 lg3 xl3 md3 sm12 class="pt-1">
+  <v-img :src="logobw" width="100%" class="mx-auto" alt="Piston" contain></v-img>
+</v-flex>
+
+            </v-layout>
+            <v-layout row wrap>
+                <!-- table for invoice_item_list -->
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <!-- <th>Invoice ID</th> -->
+                            <th>ناوی کاڵا</th>
+                            <th>بارکۆد</th>
                             <th>تێبینی</th>
-							<th>نرخ</th>
-							<th>عەدەد</th>
-							<th>کۆی گشتی</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="invoice_item,index  in list_invoice_items_view" :key="index">
-							<!-- <td>{{invoice_item.invoice_id}}</td> -->
-							<td>{{invoice_item.item_name}}</td>
-							<td>{{invoice_item.item_barcode}}</td>
+                            <th>نرخ</th>
+                            <th>عەدەد</th>
+                            <th>کۆی گشتی</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="invoice_item,index  in list_invoice_items_view" :key="index">
+                            <!-- <td>{{invoice_item.invoice_id}}</td> -->
+                            <td>{{invoice_item.item_name}}</td>
+                            <td>{{invoice_item.item_barcode}}</td>
                             <td>{{invoice_item.item_note}}</td>
-							<td>{{invoice_item.invoice_item_price}}</td>
-							<td>{{invoice_item.invoice_item_qty}}</td>
-							<td>{{invoice_item.invoice_item_price * invoice_item.invoice_item_qty}}</td>
-							<!-- delete  -->
-							<td class="no-print">
-								<v-btn color="error" icon class="mx-1" @click="list_invoice_items_view.splice(index, 1) , list_invoice_items.splice(index, 1)">
-									<v-icon> mdi-delete-outline </v-icon>
-								</v-btn>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</v-layout>
-		</v-container>
-		<v-dialog v-model="delete_dialog" persistent max-width="400">
-			<v-card>
-				<v-card-title>
-					{{$store.getters.language.data.invoices.delete_question}}
-				</v-card-title>
-				<v-card-actions>
-					<v-spacer></v-spacer>
-					<v-btn text class="elevation-0" @click="delete_dialog = false">
-						{{$store.getters.language.data.invoices.cancel_btn}}
-					</v-btn>
-					<v-btn color="error" class="elevation-0" @click="deleteInvoices(selected_invoices.invoice_id)">
-						{{$store.getters.language.data.invoices.yes_btn}}
-					</v-btn>
-				</v-card-actions>
-			</v-card>
-		</v-dialog>
-		<v-snackbar v-model="snackbar.value" :color="snackbar.color">
-			{{snackbar.text}}
-		</v-snackbar>
-	</div>
+                            <td>{{invoice_item.invoice_item_price}}</td>
+                            <td>{{invoice_item.invoice_item_qty}}</td>
+                            <td>{{invoice_item.invoice_item_price * invoice_item.invoice_item_qty}}</td>
+                            <!-- delete  -->
+                            <td class="no-print">
+                                <v-btn color="error" icon class="mx-1"
+                                    @click="list_invoice_items_view.splice(index, 1) , list_invoice_items.splice(index, 1)">
+                                    <v-icon> mdi-delete-outline </v-icon>
+                                </v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </v-layout>
+        </v-container>
+        <v-dialog v-model="delete_dialog" persistent max-width="400">
+            <v-card>
+                <v-card-title>
+                    {{$store.getters.language.data.invoices.delete_question}}
+                </v-card-title>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text class="elevation-0" @click="delete_dialog = false">
+                        {{$store.getters.language.data.invoices.cancel_btn}}
+                    </v-btn>
+                    <v-btn color="error" class="elevation-0" @click="deleteInvoices(selected_invoices.invoice_id)">
+                        {{$store.getters.language.data.invoices.yes_btn}}
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-snackbar v-model="snackbar.value" :color="snackbar.color">
+            {{snackbar.text}}
+        </v-snackbar>
+    </div>
 </template>
 <script>
 	import requests from '../../requests/invoices.request.js'
 	import items_requests from '../../requests/invoice_items.request.js'
+    
 	export default {
 		data() {
 			return {
+                logobw: require('./../../assets/invoice.png'),
 				invoices: {
 					invoice_price: 0,
 					invoice_discount: 0,
